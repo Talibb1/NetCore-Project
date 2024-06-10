@@ -1,0 +1,59 @@
+﻿@using Entities.ViewModel.AccountVM
+@model LoginVM
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <link href="~/CustomFiles/Login_SignupStyleSheet.css" rel="stylesheet" />
+    <title>Form</title>
+
+
+</head>
+<body>
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-2" type="radio" name="tab" class="sign-in" checked><label for="tab-2" class="tab">Sign In</label>
+            <input id="tab-1" type="radio" name="tab" class="sign-up"><label for="tab-1" class="tab"></label>
+            <form class="login-form" asp-controller="Account" asp-action="Login" method="post" asp-area="" asp-route-returnUrl="@Context.Request.Query["returnUrl"]">
+
+
+                <div class="sign-in-htm">
+                    @if (ViewData["error"]?.ToString() != null)
+                    {
+                        <div class="group">
+                            <div class="alert alert-danger" role="alert">
+                                <div asp-validation-summary="All"></div>
+                            </div>
+                        </div>
+                    }
+                    <div class="group">
+                        <label for="user" class="label">Email</label>
+                        <input id="user" asp-for="Email" type="email" class="input">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Password</label>
+                        <input id="pass" type="password" asp-for="PasswordHash" class="input" data-type="password">
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+                    <div class="group">
+                        <input id="check" type="checkbox" asp-for="RememberMe" class="check" checked>
+                        <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign In">
+                    </div>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="check"><span class="icon"></span> <a class="text-white" href="@Url.Action("SignUp","Account",new{Areas=""})">Do Have Register?</a></label>
+                    </div>
+               
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

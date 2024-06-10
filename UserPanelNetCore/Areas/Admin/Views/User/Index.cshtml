@@ -1,0 +1,143 @@
+﻿@using Entities.ViewModel.PagerVM
+@model PagingVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="alert alert-success">
+    <b>User!</b>/<a asp-area="Admin" asp-action="Index" asp-controller="Dashboard">Dashboard</a>
+</div>
+<br />
+
+
+<div class="row">
+    <div class="col-3">
+        <a type="submit" href="@Url.Action("Create","User",new{Areas="Admin"})" class=" btn btn-success w-100">Add +</a>
+
+    </div>
+</div>
+<br />
+<br />
+
+<table class="table table-bordered table-sm table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            
+            <th>Auction</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.userListVM!.Count > 0)
+        {
+
+            @foreach (var item in Model.userListVM)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.UserName</td>
+                    
+                    <td>
+                        <a class=" btn btn-warning  " href="@Url.Action("ShowUserRole","User",new{userId=item.Id})">Assign Role</a>
+                        <a class=" btn btn-primary  " href="@Url.Action("Edit","User",new{id=item.Id})">Edit</a>
+                        <a class=" btn btn-dark  " href="@Url.Action("Details","User",new{id=item.Id})">Details</a>
+
+                        
+
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Rows Not Found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@if (Model!.Paging!.PagingCount > 1)
+{
+
+
+    <!-- Pagination example -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+
+            @if (Model.Paging.CurrentPageCount > 1)
+            {
+                <!-- Previous page button -->
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index","User",new{Areas="Admin",CurrentPageCount=Model.Paging.CurrentPageCount-1})" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+
+                    </a>
+                </li>
+            }
+            else
+            {
+                <!-- Previous page button -->
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index","User",new{Areas="Admin",CurrentPageCount=Model.Paging.CurrentPageCount})" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+            }
+
+
+            @for (int i = 1; i <= Model.Paging.PagingCount; i++)
+            {
+                if (i == Model.Paging.CurrentPageCount)
+                {
+                    <!-- Page number buttons -->
+                    <li class="page-item">
+                        <a class="page-link active" href="@Url.Action("Index","User",new{Areas="Admin",CurrentPageCount=i})">@i</a>
+                    </li>
+                }
+                else
+                {
+                    <!-- Page number buttons -->
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index","User",new{Areas="Admin",CurrentPageCount=i})">@i</a>
+                    </li>
+                }
+
+
+            }
+
+
+            @if (Model.Paging.CurrentPageCount < Model.Paging.PagingCount)
+            {
+
+                <!-- Next page button -->
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index","User",new{Areas="Admin",CurrentPageCount=Model.Paging.CurrentPageCount+1})" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <!-- Next page button -->
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index","User",new{Areas="Admin",CurrentPageCount=Model.Paging.PagingCount})" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            }
+
+
+        </ul>
+    </nav>
+
+}
+
+

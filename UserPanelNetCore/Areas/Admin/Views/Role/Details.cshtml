@@ -1,0 +1,47 @@
+﻿@using Entities.ViewModel.Identity.RoleVM
+@model RoleUpdateVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Role" asp-action="Update" asp-area="Admin" method="post" enctype="multipart/form-data">
+
+    <div id="Form">
+        <input asp-for="Id" type="hidden" />
+        <input asp-for="RowVersion" type="hidden" />
+
+
+
+
+        @if (ViewData["error"]?.ToString() != null)
+        {
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    <div asp-validation-summary="All"></div>
+                </div>
+            </div>
+        }
+        <br />
+
+        <div class="row">
+
+            <div class="col-12">
+                <input type="text" asp-for="Name" class="form-control" placeholder="Enter Role Name ">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+        </div>
+
+
+        <br />
+        <div class="row col-6">
+            <button type="submit" class="btn btn-primary">Update Role</button>
+
+        </div>
+        <br />
+    </div>
+</form>
+
+

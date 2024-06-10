@@ -1,0 +1,67 @@
+﻿@using Entities.ViewModel.Identity.RoleVM
+@model List<RoleListVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<div class="alert alert-primary">
+    <strong>Role!</strong>/<a asp-area="Admin" asp-action="Index" asp-controller="Dashboard">Dashboard</a>
+</div>
+
+
+<br />
+
+
+
+<div class="row">
+    <div class="col-3">
+        <a type="submit" href="@Url.Action("Create","Role",new{Areas="Admin"})" class=" btn btn-primary w-100">Create </a>
+
+    </div>
+</div>
+<br />
+<br />
+
+
+<table class="table table-bordered table-sm table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count() > 0)
+        {
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <a class=" btn btn-warning " href="@Url.Action("Details","Role",new{Id=item.Id})">Edit</a>     <a class=" btn btn-danger" href="@Url.Action("Deletes","Role",new{id=item.Id})">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Rows Not Found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+

@@ -1,0 +1,53 @@
+﻿@using Entities.ViewModel.Identity.RoleVM
+@model RoleAddVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Role" asp-action="Create" asp-area="Admin" method="post">
+
+    <div>
+
+
+
+        @if (ViewData["error"]?.ToString() != null)
+        {
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    <div asp-validation-summary="All"></div>
+                </div>
+            </div>
+        }
+        <br />
+
+        <div class="row">
+
+            <div class="col-12">
+                <input type="text" asp-for="Name" class="form-control" placeholder="Enter Role Name ">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+        </div>
+
+
+
+
+        <br />
+        <div class="row col-6">
+            <button type="submit" class="btn btn-primary">Save Role</button>
+
+        </div>
+        <br />
+
+    </div>
+
+
+
+</form>
+
+
+
+
+

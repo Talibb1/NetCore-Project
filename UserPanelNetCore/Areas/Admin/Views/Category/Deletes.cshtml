@@ -1,0 +1,79 @@
+﻿@using  Entities.ViewModel.WebApplication.CategoryVM
+@model CategoryListVM
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        width: 400px;
+        margin: 100px auto;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    p {
+        margin-bottom: 20px;
+        padding: 0 20px;
+    }
+</style>
+@if (Model != null)
+{
+    <h3 class="text-danger">Are You Want To Sure TO Delete This Information!</h3>
+
+
+    <form asp-controller="Category" asp-action="Delete" asp-area="Admin" asp-route-id="@Model.Id" method="post">
+
+        <div class="container">
+            <h2>Category Data</h2>
+            <div class="row">
+
+                <div class="col-6">
+
+                    <p> Id: @Model.Id</p>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <p>Name: @Model.Name</p>
+                </div>
+            </div>
+
+     
+
+            <div class="row">
+                <div class="col-12">
+                    <input type="submit" class="btn btn-danger" value="Delete" />
+                </div>
+
+            </div>
+
+            <!-- Add more user data here as needed -->
+        </div>
+
+
+
+
+
+    </form>
+}
+else
+{
+    <h3 class="text-danger">Something went wrong please try again</h3>
+}

@@ -1,0 +1,50 @@
+﻿@using Entities.ViewModel.WebApplication.CategoryVM
+@model CategoryAddVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-controller="Category" asp-action="Create" asp-area="Admin" method="post" enctype="multipart/form-data">
+    <div id="Form">
+
+
+
+        @if (ViewData["error"]?.ToString() != null)
+        {
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    <div asp-validation-summary="All"></div>
+                </div>
+            </div>
+        }
+        <br />
+
+        <div class="row">
+
+            <div class="col-12">
+                <input type="text" asp-for="Name" class="form-control" placeholder="Enter Tittle ">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <br />
+
+
+
+
+        <br />
+        <div class="row col-6">
+            <button type="submit" class="btn btn-primary" id="SaveAddCategory">Add Category</button>
+
+        </div>
+
+    </div>
+</form>
+
+
+
+
+

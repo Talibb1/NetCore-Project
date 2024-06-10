@@ -1,0 +1,39 @@
+﻿@using Entities.ViewModel.Identity.UserVM
+@model UserAssignRoleVM;
+@{
+    ViewData["Title"] = "ShowUserRole";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="alert alert-success" role="alert">
+    Assign User Role
+</div>
+
+
+<form asp-area="Admin" asp-controller="User" asp-action="AssignRoles" method="post">
+
+    <input type="hidden" asp-for="@Model.user.Id" />
+    <div class="row">
+        <div class="col-6">
+            <p>UserName : <b>@Model.user.UserName</b></p>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 ">
+                <p>Assign Role:</p>
+                @for (int i = 0; i < Model.roles.Count; i++)
+                {
+                    <input type="hidden" asp-for="@Model.roles[i].Value" />
+                    <input asp-for="@Model.roles[i].Selected" />  <b>@Model.roles[i].Text</b>
+                }
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-6">
+                <input type="submit" value="Assign Role" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>

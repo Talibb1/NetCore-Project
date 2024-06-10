@@ -1,0 +1,70 @@
+﻿@using Entities.ViewModel.AccountVM
+@model  SignUpVM
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <link href="~/CustomFiles/Login_SignupStyleSheet.css" rel="stylesheet" />
+    <title>Form</title>
+
+</head>
+<body>
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign Up</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+            <form class="login-form" asp-controller="Account" asp-action="Signup" method="post" asp-area="">
+
+                <div class="sign-in-htm">
+
+                    @if (ViewData["error"]?.ToString() != null)
+                    {
+                        <div class="group">
+                            <div class="alert alert-danger" role="alert">
+                                <div asp-validation-summary="All"></div>
+                            </div>
+                        </div>
+                    }
+                    <br />
+                    <div class="group">
+                        <label for="user" class="label">Username</label>
+                        <input id="user" asp-for="UserName" type="text" class="input">
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+             
+                    <div class="group">
+                        <label for="pass" class="label">Password</label>
+                        <input id="pass" type="password" asp-for="PasswordHash" class="input" data-type="password">
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+
+                    <div class="group">
+                        <label for="pass" class="label">Email Address</label>
+                        <input id="pass" asp-for="Email" type="email" class="input">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+
+
+                    <div class="group">
+                        <input type="submit" class="button" value="Sign Up">
+                    </div>
+
+
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a class="text-white" href="@Url.Action("LogIn","Account",new{Areas=""})">You are Register?go for Login </a>
+
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</body>
+</html>
